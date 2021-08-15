@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace UnitTest
+namespace CodeKataTests
 {
     public class Tests
     {
@@ -10,9 +10,11 @@ namespace UnitTest
         }
 
         [Test]
-        public void Test1()
-        {
-            Assert.Pass();
-        }
+        [TestCase("Nish Mandal", "nana")]
+		public void GivenAString_Return_Correct_ArrayOfDuplicatesCharacters(string input, char[] expResult)
+		{
+            var charArray = input.ToCharArray();
+			Assert.That(charArray, Is.EqualTo(expResult));
+		}
     }
 }
