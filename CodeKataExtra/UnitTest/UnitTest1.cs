@@ -14,10 +14,10 @@ namespace CodeKataTests
         [TestCase("Nishant Mandal", new char[] { 'n', 'a' })]
         [TestCase("Martin Beard", new char[] { 'a', 'r' })]
         [TestCase("Alex Rae", new char[] { 'a', 'e' })]
-        public void GivenAString_Return_Correct_ArrayOfDuplicateCharacters(string input, char[] expResult)
+        public void GivenAString_Return_Correct_ArrayOfDuplicateCharacters(string input, char[] expChar)
 		{
             var charArray = Method.ReturnDuplicate(input);
-			Assert.That(charArray, Is.EqualTo(expResult));
+			Assert.That(charArray, Is.EqualTo(expChar));
 		}
 
         [TestCase("Alex")]
