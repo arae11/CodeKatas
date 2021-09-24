@@ -187,4 +187,73 @@ namespace CodeKataTests
                 Throws.TypeOf<ArgumentOutOfRangeException>().With.Message.Contains("Specified argument was out of the range of valid values."));
         }
     }
+
+    public class ClosestToZeroTests
+    {
+        [TestCase(new int[] { 2, 8, 1, 4, 2, 6, 7, 3, 4, 9 }, 1)]
+        [TestCase(new int[] { 2, 8, 3, 4, 4, 6, 7, 3, 4, 9 }, 2)]
+        [TestCase(new int[] { 11, 12, 13, 14, 14, 16, 10, 13, 14, 19 }, 10)]
+        [TestCase(new int[] { 11, 12, 13, 14, -1, 16, 10, 13, 14, 19 }, -1)]
+        [TestCase(new int[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 }, 2)]
+        public void GivenAnArrayOfInts_NumberClosestToZeroIsReturned(int[] input, int expResult)
+        {
+            Assert.That(Method.NumberClosestToZero2(input), Is.EqualTo(expResult));
+        }
+
+        [TestCase(new int[] { }, 0)]
+        public void GivenAnArrayContainingNulls_Throw_NullException()
+        {
+            Assert.That(() => Method.NumberClosestToZero2(null),
+                Throws.TypeOf<ArgumentNullException>().With.Message.Contains("Value cannot be null."));
+        }
+    }
+
+    public class GroupedByCommasTests
+    {
+        [TestCase(1, "1")]
+        [TestCase(12, "12")]
+        [TestCase(123, "123")]
+        [TestCase(1234, "1,234")]
+        [TestCase(12345, "12,345")]
+        [TestCase(123456, "123,456")]
+        [TestCase(1234567, "1,234,567")]
+        [TestCase(12345678, "12,345,678")]
+        [TestCase(123456789, "123,456,789")]
+        [TestCase(1234567890, "1,234,567,890")]
+        public void GivenAnInputOfAnInt_InsertCommaAtCorrectLocationAndReturnAsString(int input, string expResult)
+        {
+            Assert.That(Method.GroupedByCommas(input), Is.EqualTo(expResult));
+        }
+    }
+
+    public class WhoLikesItTests
+    {
+        [Test, Description("It should return correct text")]
+        public void SampleTest()
+        {
+            Assert.AreEqual("no one likes this", Method.Likes(new string[0]));
+            Assert.AreEqual("Peter likes this", Method.Likes(new string[] { "Peter" }));
+            Assert.AreEqual("Jacob and Alex like this", Method.Likes(new string[] { "Jacob", "Alex" }));
+            Assert.AreEqual("Max, John and Mark like this", Method.Likes(new string[] { "Max", "John", "Mark" }));
+            Assert.AreEqual("Alex, Jacob and 2 others like this", Method.Likes(new string[] { "Alex", "Jacob", "Mark", "Max" }));
+        }
+    }
+
+    public class IsAFibonacciNumber
+    {
+        [TestCase(1, true)]
+        [TestCase(2, true)]
+        [TestCase(3, true)]
+        [TestCase(5, true)]
+        [TestCase(8, true)]
+        [TestCase(13, true)]
+        [TestCase(21, true)]
+        [TestCase(34, true)]
+        [TestCase(55, true)]
+        [TestCase(89, true)]
+        public void GivenAnInputNumber_Return_True_IfInputNumberIsAFibonacciNumber(int input, bool expResult)
+        {
+            Assert.That(Method.IsThisAFibonacciNumber(input), Is.EqualTo(expResult));
+        }
+    }
 }

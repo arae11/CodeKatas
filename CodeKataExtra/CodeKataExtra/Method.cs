@@ -12,8 +12,8 @@ namespace CodeKataMethods
         {
             //Console.WriteLine("The quick brown fox jumps over the lazy dog");
             #region AddArrayOfNumsThatAreDivisibleBy2Or3
-            int[] nums = new int[] { 21, 45, 26, 54, 11, 76, 44, 88, 23 };
-            Console.WriteLine(ArrayOfNums(nums));
+            //int[] nums = new int[] { 21, 45, 26, 54, 11, 76, 44, 88, 23 };
+            //Console.WriteLine(ArrayOfNums(nums));
             #endregion
 
             #region ReturnString
@@ -70,8 +70,13 @@ namespace CodeKataMethods
             #endregion
 
             #region SecondHighest
-            //int[] numArray = new int[] { 2, 8, 1, 4, 2, 6, 7, 3, 4, 1 };
+            //int[] numArray = new int[] { 2, 8, 1, 4, 2, 6, 7, 3, 4, 9 };
             //Console.WriteLine(SecondHighest(numArray));
+            #endregion
+
+            #region NearestToZero
+            //int[] input = new int[] { 2, 8, 1, 4, 2, 6, 7, 3, 4, 9 };
+            //Console.WriteLine(NumberClosestToZero(input));
             #endregion
         }
 
@@ -108,7 +113,7 @@ namespace CodeKataMethods
         //Create a method which returns the sum of fibonacci numbers up to the nth fibonacci number.
         public static int FibonacciNumbers(int input)
         {
-            List<int> fSequence = new List<int>() { 0, 1 };
+            //List<int> fSequence = new List<int>() { 0, 1 };
             int firstNumber = 0; 
             int secondNumber = 1; 
             int sum = 0; 
@@ -399,6 +404,132 @@ namespace CodeKataMethods
             return new int[] { humanYears, catYears, dogYears };
         }
         #endregion
-    }
 
+        #region ReturnNumberClosestTo0
+        //Create a method that takes an int[] array and returns the number which is closest to 0
+        public static int NumberClosestToZero(int[] input)
+        {
+            
+            var result = input.Max();
+
+            if (input == null || input.Length == 0)
+            {
+                throw new ArgumentException();
+            }
+            else
+            {
+                for (int i = 0; i < input.Length; i++)
+                {
+                    if (input[i] < result)
+                    {
+                        result = input[i];
+                    }
+                }
+            }
+            return result;
+        }
+
+        public static int NumberClosestToZero2(int[] input)
+        {
+            int current = 0;
+            int result = input[0];
+            Array.Sort(input);
+
+            if (input == null || input.Length == 0)
+            {
+                throw new ArgumentNullException();
+            }
+            else
+            {
+                for (int i = 0; i < input.Length; i++)
+                {
+                    current = input[i] * input[i];
+                    if (current <= (result * result))
+                    {
+                        result = input[i];
+                    }
+                }
+            } 
+            return result;
+        }
+        #endregion
+
+        #region GroupedByCommas
+        public static string GroupedByCommas(int n)
+        {
+            return n.ToString("N0");
+        }
+        #endregion
+
+        #region WhoLikesIt?
+        public static string Likes(string[] name)
+        {
+            if (name.Length == 0)
+            {
+                return "no one likes this";
+            }
+            else if (name.Length == 1)
+            {
+                return $"{name[0]} likes this";
+            }
+            else if (name.Length == 2)
+            {
+                return $"{name[0]} and {name[1]} like this";
+            }
+            else if (name.Length == 3)
+            {
+                return $"{name[0]}, {name[1]} and {name[2]} like this";
+            }
+            else
+            {
+                return $"{name[0]}, {name[1]} and {name.Length - 2} others like this";
+            }
+        }
+
+        public static string LikesOL(string[] name)
+        {
+            return name.Length < 2 ? (name.Length == 1 ? name[0] : "no one") + " likes this" : string.Format("{0}{1} and {2} like this",
+                    name.Length == 2 ? new string[] { "", name[0], name[1] } : new string[] { name[0] + ", ",
+                    name[1], name.Length > 3 ? (name.Length - 2).ToString() + " others" : name[2] });
+        }
+        #endregion
+
+        #region Fibonacci Number
+        // Write a method/s which determines whether a number is a Fibonacci number.
+        public static bool IsThisAFibonacciNumber(int input)
+        {
+            // A number is Fibonacci if and only if one or both of (5n2 + 4) or (5n2 – 4) is a perfect square (Source: Wiki).
+            // Following is a simple program based on this concept.
+
+            List<int> numList = new List<int>() { 0, 1 };
+            int a = 0;
+            int b = 1;
+            int c = 0;
+
+            for (int i = 0; i < input; i++)
+            {
+                c = a + b;
+                numList.Add(c);
+                a = b;
+                numList.Add(a);
+                b = c;
+                numList.Add(b);
+            }
+            foreach (var num in numList)
+            {
+                if (input == num)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool IsThisAFibonacciNumberOL(int input)
+        {
+            return Math.Sqrt(5 * Math.Pow(input, 2) + 4) % (int)Math.Sqrt(5 * Math.Pow(input, 2) + 4) == 0 ||
+                Math.Sqrt(5 * Math.Pow(input, 2) - 4) % (int)Math.Sqrt(5 * Math.Pow(input, 2) - 4) == 0;
+        }
+        #endregion
+    }
 }
